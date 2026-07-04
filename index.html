@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A Special Digital Flower Bouquet for You 🌸</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome untuk Ikon -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- html2canvas untuk Save Memory (Screenshot) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+  <!-- HUBUNGKAN KE FILE CSS EKSTERNAL -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- BACKGROUND EFEK & PARTIKEL -->
+  <div class="bg-animation-container" id="bg-container"></div>
+
+  <!-- HALAMAN PEMBUKA (GIFT SCREEN) -->
+  <section id="gift-screen">
+    <div class="gift-container">
+      <h1 class="gift-title brand-font">A Special Bouquet For You 🌸</h1>
+      
+      <!-- Kotak Kado 3D Interaktif -->
+      <div class="gift-box" id="main-gift-box">
+        <div class="box-bow"></div>
+        <div class="box-lid"></div>
+        <div class="box-ribbon-v"></div>
+        <div class="box-ribbon-h"></div>
+        <div class="box-body"></div>
+      </div>
+
+      <button class="btn-premium" id="open-gift-btn">
+        <i class="fa-solid fa-gift"></i> Open Gift
+      </button>
+    </div>
+  </section>
+
+  <!-- KONTEN UTAMA -->
+  <main id="main-content">
+    
+    <header>
+      <div class="logo brand-font">
+        <span>🌸</span> Cindyfloria
+      </div>
+
+      <div class="header-controls">
+        <div class="btn-circle" id="theme-toggle" title="Ubah Tema">
+          <i class="fa-solid fa-moon"></i>
+        </div>
+
+        <div class="music-player-container">
+          <div class="music-widget glass-card">
+            <div class="album-art-wrap">
+              <img src="https://images.unsplash.com/photo-1526047932273-341f2a7631f9?q=80&w=120&auto=format&fit=crop" alt="Album Art" class="album-art" id="album-cover">
+            </div>
+            <div class="music-info">
+              <div class="music-title" id="music-title">Acoustic Romance</div>
+              <div class="music-artist" id="music-artist">Sweet Instrumental</div>
+              
+              <div class="player-controls">
+                <button class="music-btn" id="prev-btn"><i class="fa-solid fa-backward"></i></button>
+                <button class="music-btn play-pause-btn" id="play-btn"><i class="fa-solid fa-play"></i></button>
+                <button class="music-btn" id="next-btn"><i class="fa-solid fa-forward"></i></button>
+                
+                <div class="volume-container">
+                  <i class="fa-solid fa-volume-high" style="font-size: 0.75rem;"></i>
+                  <input type="range" class="volume-slider" id="volume-slider" min="0" max="1" step="0.1" value="0.8">
+                </div>
+              </div>
+
+              <div class="progress-container" id="progress-container">
+                <div class="progress-bar" id="progress-bar"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <section class="app-grid">
+      <div class="bouquet-display-area" id="capture-area">
+        <div class="bouquet-back-glow" id="back-glow"></div>
+
+        <div class="flower-popup glass-card" id="flower-popup">
+          <div class="popup-title">
+            <span id="popup-flower-icon">🌹</span>
+            <span id="popup-flower-name">Rose</span>
+          </div>
+          <p class="popup-text" id="popup-message">"You make the world brighter."</p>
+        </div>
+
+        <div class="bouquet-wrapper" id="bouquet-wrapper">
+          <svg class="flower-svg-container" viewBox="0 0 400 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <radialGradient id="rose-grad-pink" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#FFD1DF" class="color-transition" id="rose-stop-1" />
+                <stop offset="100%" stop-color="#E89AAE" class="color-transition" id="rose-stop-2" />
+              </radialGradient>
+              
+              <linearGradient id="tulip-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#FFB5C5" class="color-transition" id="tulip-stop-1" />
+                <stop offset="100%" stop-color="#D98CA3" class="color-transition" id="tulip-stop-2" />
+              </linearGradient>
+
+              <radialGradient id="daisy-center" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#FFF3A1" />
+                <stop offset="100%" stop-color="#F9D423" />
+              </radialGradient>
+              <linearGradient id="daisy-petal" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#FFFFFF" />
+                <stop offset="100%" stop-color="#FFF2F2" class="color-transition" id="daisy-stop" />
+              </linearGradient>
+
+              <linearGradient id="lavender-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#E1D5F5" class="color-transition" id="lavender-stop-1" />
+                <stop offset="100%" stop-color="#A594F2" class="color-transition" id="lavender-stop-2" />
+              </linearGradient>
+
+              <linearGradient id="wrap-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#FFFFFF" />
+                <stop offset="100%" stop-color="#FCDFEA" id="wrap-stop" />
+              </linearGradient>
+
+              <filter id="soft-shadow" x="-10%" y="-10%" width="120%" height="120%">
+                <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#D98CA3" flood-opacity="0.15" />
+              </filter>
+            </defs>
+
+            <!-- LAYER 1: DAUN LATAR -->
+            <g id="foliage-back" filter="url(#soft-shadow)">
+              <path d="M 120 280 C 80 230, 70 170, 110 130 C 130 160, 140 210, 130 260" fill="#93B79C" opacity="0.8"/>
+              <path d="M 280 280 C 320 230, 330 170, 290 130 C 270 160, 260 210, 270 260" fill="#93B79C" opacity="0.8"/>
+              <path d="M 100 290 Q 70 210, 60 140" stroke="#7BA385" stroke-width="3" stroke-linecap="round"/>
+              <path d="M 300 290 Q 330 210, 340 140" stroke="#7BA385" stroke-width="3" stroke-linecap="round"/>
+            </g>
+
+            <!-- LAYER 2: TANGKAI -->
+            <g id="stems" stroke="#7BA385" stroke-width="4.5" stroke-linecap="round">
+              <path d="M 200 420 L 150 250" />
+              <path d="M 200 420 L 190 220" />
+              <path d="M 200 420 L 250 240" />
+              <path d="M 200 420 L 110 260" />
+              <path d="M 200 420 L 290 270" />
+            </g>
+
+            <!-- LAYER 3: LAVENDER -->
+            <g class="interactive-flower" id="flower-lavender-l" onclick="flowerClicked('Lavender', '💜 Lavender itu lambang ketenangan. Kayak kamu yang selalu bikin hatiku adem.', '💜', this)">
+              <path d="M 80 210 Q 70 180, 65 140" stroke="#7BA385" stroke-width="2.5"/>
+              <circle cx="65" cy="140" r="7" fill="url(#lavender-grad)"/>
+              <circle cx="60" cy="150" r="6" fill="url(#lavender-grad)"/>
+              <circle cx="70" cy="152" r="6" fill="url(#lavender-grad)"/>
+              <circle cx="65" cy="162" r="7" fill="url(#lavender-grad)"/>
+              <circle cx="58" cy="170" r="6" fill="url(#lavender-grad)"/>
+              <circle cx="72" cy="172" r="6" fill="url(#lavender-grad)"/>
+              <circle cx="65" cy="182" r="6" fill="url(#lavender-grad)"/>
+            </g>
+
+            <g class="interactive-flower" id="flower-lavender-r" onclick="flowerClicked('Lavender', '💜 Tenang banget rasanya tiap kali inget kalau aku punya kamu di hidup ini.', '💜', this)">
+              <path d="M 320 210 Q 330 180, 335 140" stroke="#7BA385" stroke-width="2.5"/>
+              <circle cx="335" cy="140" r="7" fill="url(#lavender-grad)"/>
+              <circle cx="330" cy="150" r="6" fill="url(#lavender-grad)"/>
+              <circle cx="340" cy="152" r="6" fill="url(#lavender-grad)"/>
+              <circle cx="335" cy="162" r="7" fill="url(#lavender-grad)"/>
+              <circle cx="328" cy="170" r="6" fill="url(#lavender-grad)"/>
+              <circle cx="342" cy="172" r="6" fill="url(#lavender-grad)"/>
+              <circle cx="335" cy="182" r="6" fill="url(#lavender-grad)"/>
+            </g>
+
+            <!-- LAYER 4: BABY'S BREATH -->
+            <g id="babys-breath" opacity="0.85">
+              <path d="M 150 250 Q 120 200, 130 160" stroke="#A8C3B0" stroke-width="1.5"/>
+              <path d="M 250 250 Q 280 200, 270 160" stroke="#A8C3B0" stroke-width="1.5"/>
+              <circle cx="120" cy="170" r="4" fill="#FFFFFF" stroke="#F5D7E3" stroke-width="0.5"/>
+              <circle cx="135" cy="155" r="4" fill="#FFFFFF" stroke="#F5D7E3" stroke-width="0.5"/>
+              <circle cx="145" cy="175" r="3.5" fill="#FFFFFF" stroke="#F5D7E3" stroke-width="0.5"/>
+              <circle cx="110" cy="185" r="4" fill="#FFFFFF" stroke="#F5D7E3" stroke-width="0.5"/>
+              <circle cx="280" cy="170" r="4" fill="#FFFFFF" stroke="#F5D7E3" stroke-width="0.5"/>
+              <circle cx="265" cy="155" r="4" fill="#FFFFFF" stroke="#F5D7E3" stroke-width="0.5"/>
+              <circle cx="255" cy="175" r="3.5" fill="#FFFFFF" stroke="#F5D7E3" stroke-width="0.5"/>
+              <circle cx="290" cy="185" r="4" fill="#FFFFFF" stroke="#F5D7E3" stroke-width="0.5"/>
+            </g>
+
+            <!-- LAYER 5: MAWAR UTAMA -->
+            <g class="interactive-flower" id="flower-rose-center" onclick="flowerClicked('Mawar Premium', '🌹 Kamu tuh berharga banget, kayak mawar yang lagi mekar cantik-cantiknya.', '🌹', this)">
+              <circle cx="200" cy="210" r="42" fill="url(#rose-grad-pink)"/>
+              <path d="M 170 200 C 175 175, 225 175, 230 200 C 220 220, 180 220, 170 200 Z" fill="#E89AAE" class="color-transition" id="rose-petal-1" opacity="0.95"/>
+              <path d="M 160 215 C 170 240, 230 240, 240 215 C 210 210, 190 210, 160 215 Z" fill="#D98CA3" class="color-transition" id="rose-petal-2" opacity="0.9"/>
+              <path d="M 180 195 C 190 185, 210 185, 220 195 C 210 205, 190 205, 180 195 Z" fill="#F8C8DC" class="color-transition" id="rose-petal-3" opacity="0.9"/>
+              <ellipse cx="200" cy="207" rx="12" ry="8" fill="#B35F76" class="color-transition" id="rose-core"/>
+            </g>
+
+            <g class="interactive-flower" id="flower-rose-left" onclick="flowerClicked('Mawar Merah Muda', '🌸 Makasih ya udah selalu jadi diri kamu sendiri yang luar biasa apa adanya.', '🌸', this)">
+              <circle cx="140" cy="250" r="35" fill="url(#rose-grad-pink)"/>
+              <path d="M 115 240 C 120 220, 160 220, 165 240 C 155 255, 125 255, 115 240 Z" fill="#E89AAE" class="color-transition" id="rose-left-p1" opacity="0.95"/>
+              <path d="M 125 235 C 130 225, 150 225, 155 235 C 145 242, 135 242, 125 235 Z" fill="#F8C8DC" class="color-transition" id="rose-left-p2" opacity="0.9"/>
+              <ellipse cx="140" cy="246" rx="9" ry="6" fill="#B35F76" class="color-transition" id="rose-left-core"/>
+            </g>
+
+            <g class="interactive-flower" id="flower-rose-right" onclick="flowerClicked('Mawar Romantis', '💖 Senyum kamu tuh beneran bikin dunia yang berisik ini jadi langsung cerah.', '💖', this)">
+              <circle cx="260" cy="250" r="35" fill="url(#rose-grad-pink)"/>
+              <path d="M 235 240 C 240 220, 280 220, 285 240 C 275 255, 245 255, 235 240 Z" fill="#E89AAE" class="color-transition" id="rose-right-p1" opacity="0.95"/>
+              <path d="M 245 235 C 250 225, 270 225, 275 235 C 265 242, 255 242, 245 235 Z" fill="#F8C8DC" class="color-transition" id="rose-right-p2" opacity="0.9"/>
+              <ellipse cx="260" cy="246" rx="9" ry="6" fill="#B35F76" class="color-transition" id="rose-right-core"/>
+            </g>
+
+            <!-- LAYER 6: TULIP ELEGAN -->
+            <g class="interactive-flower" id="flower-tulip-l" onclick="flowerClicked('Tulip Pink', '🌷 Tulip ini lambang sayang yang tulus banget. Iya, setulus itu sayangku ke kamu.', '🌷', this)">
+              <path d="M 130 170 C 110 140, 130 100, 150 120 C 140 140, 140 160, 130 170 Z" fill="url(#tulip-grad)"/>
+              <path d="M 170 170 C 190 140, 170 100, 150 120 C 160 140, 160 160, 170 170 Z" fill="url(#tulip-grad)"/>
+              <path d="M 150 175 C 135 140, 150 110, 150 110 C 150 110, 165 140, 150 175 Z" fill="#E89AAE" class="color-transition" id="tulip-l-center"/>
+            </g>
+
+            <g class="interactive-flower" id="flower-tulip-r" onclick="flowerClicked('Tulip Klasik', '🌷 Semoga semua hal baik selalu dateng dan tumbuh subur di hidupmu, ya.', '🌷', this)">
+              <path d="M 230 170 C 210 140, 230 100, 250 120 C 240 140, 240 160, 230 170 Z" fill="url(#tulip-grad)"/>
+              <path d="M 270 170 C 290 140, 270 100, 250 120 C 260 140, 260 160, 270 170 Z" fill="url(#tulip-grad)"/>
+              <path d="M 250 175 C 235 140, 250 110, 250 110 C 250 110, 265 140, 250 175 Z" fill="#E89AAE" class="color-transition" id="tulip-r-center"/>
+            </g>
+
+            <!-- LAYER 7: DAISY -->
+            <g class="interactive-flower" id="flower-daisy" onclick="flowerClicked('Daisy Putih', '🌼 Daisy ini lambang keceriaan murni. Tetep ketawa dan bahagia terus ya, cantik!', '🌼', this)">
+              <g id="daisy-petals">
+                <ellipse cx="200" cy="290" rx="6" ry="24" fill="url(#daisy-petal)" transform="rotate(0, 200, 290)"/>
+                <ellipse cx="200" cy="290" rx="6" ry="24" fill="url(#daisy-petal)" transform="rotate(30, 200, 290)"/>
+                <ellipse cx="200" cy="290" rx="6" ry="24" fill="url(#daisy-petal)" transform="rotate(60, 200, 290)"/>
+                <ellipse cx="200" cy="290" rx="6" ry="24" fill="url(#daisy-petal)" transform="rotate(90, 200, 290)"/>
+                <ellipse cx="200" cy="290" rx="6" ry="24" fill="url(#daisy-petal)" transform="rotate(120, 200, 290)"/>
+                <ellipse cx="200" cy="290" rx="6" ry="24" fill="url(#daisy-petal)" transform="rotate(150, 200, 290)"/>
+              </g>
+              <circle cx="200" cy="290" r="10" fill="url(#daisy-center)"/>
+            </g>
+
+            <!-- LAYER 8: KERTAS PEMBUNGKUS & PITA -->
+            <g id="wrapping-paper" filter="url(#soft-shadow)">
+              <path d="M 110 260 C 50 320, 100 420, 200 450 C 130 380, 120 300, 110 260" fill="url(#wrap-grad)" class="wrap-paper" id="wrap-left" opacity="0.9"/>
+              <path d="M 290 260 C 350 320, 300 420, 200 450 C 270 380, 280 300, 290 260" fill="url(#wrap-grad)" class="wrap-paper" id="wrap-right" opacity="0.9"/>
+              <path d="M 120 280 L 200 470 L 280 280 C 230 330, 170 330, 120 280 Z" fill="url(#wrap-grad)" class="wrap-paper" id="wrap-front"/>
+              
+              <g class="ribbon" id="ribbon-bow">
+                <path d="M 200 410 C 170 395, 160 425, 200 425 Z" fill="#E89AAE" stroke="#D98CA3" stroke-width="1.5" class="color-transition" id="ribbon-l-loop"/>
+                <path d="M 200 410 C 230 395, 240 425, 200 425 Z" fill="#E89AAE" stroke="#D98CA3" stroke-width="1.5" class="color-transition" id="ribbon-r-loop"/>
+                <rect x="192" y="408" width="16" height="15" rx="4" fill="#D98CA3" class="color-transition" id="ribbon-knot"/>
+                <path d="M 195 423 Q 180 450, 175 465" stroke="#E89AAE" stroke-width="4.5" stroke-linecap="round" class="color-transition" id="ribbon-tail-1"/>
+                <path d="M 205 423 Q 220 450, 225 465" stroke="#E89AAE" stroke-width="4.5" stroke-linecap="round" class="color-transition" id="ribbon-tail-2"/>
+              </g>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <div class="letter-btn-container">
+      <div class="action-row">
+        <button class="btn-premium" id="open-letter-btn">
+          <i class="fa-solid fa-envelope-open-text"></i> Open Letter
+        </button>
+        <button class="btn-premium" id="save-memory-btn" style="background: linear-gradient(135deg, #7BA385, #93B79C);">
+          <i class="fa-solid fa-camera"></i> Save Memory
+        </button>
+      </div>
+    </div>
+
+    <section class="gallery-section">
+      <h3 class="section-title">Choose Your Bouquet</h3>
+      <div class="gallery-options">
+        <div class="gallery-card glass-card active" onclick="changeBouquetTheme('pink', this)">
+          <div class="gallery-preview-color p-pink"></div>
+          <h4>Pink Blossom</h4>
+        </div>
+        <div class="gallery-card glass-card" onclick="changeBouquetTheme('white', this)">
+          <div class="gallery-preview-color p-white"></div>
+          <h4>Elegant White</h4>
+        </div>
+        <div class="gallery-card glass-card" onclick="changeBouquetTheme('lavender', this)">
+          <div class="gallery-preview-color p-lavender"></div>
+          <h4>Soft Lavender</h4>
+        </div>
+        <div class="gallery-card glass-card" onclick="changeBouquetTheme('mixed', this)">
+          <div class="gallery-preview-color p-mixed"></div>
+          <h4>Warm Harmony</h4>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <p class="copyright">by cindy olivia &middot; Floria Premium Digital Gift &copy; 2026</p>
+    </footer>
+  </main>
+
+  <!-- MODAL SURAT -->
+  <div id="letter-modal">
+    <div class="envelope-wrapper" id="envelope-wrapper">
+      <div class="envelope">
+        <div class="envelope-flap"></div>
+        <div class="envelope-pockets"></div>
+        <div class="envelope-pockets-side"></div>
+      </div>
+      <div class="letter-paper" id="letter-paper">
+        <div class="letter-content" id="typewriter-content"></div>
+        <div class="letter-signature" id="letter-signature">
+          Selalu buat kamu, <br>
+          <span style="font-family: var(--font-title); font-weight: bold;">Seseorang</span>
+        </div>
+        <button class="close-letter-btn" id="close-letter-btn">Tutup Dulu</button>
+      </div>
+    </div>
+  </div>
+
+  <audio id="audio-player" loop></audio>
+
+  <div class="toast-notification" id="toast-notif">
+    <span id="toast-icon">✨</span>
+    <span id="toast-message">Menyimpan kenangan indah...</span>
+  </div>
+
+  <!-- HUBUNGKAN KE FILE JAVASCRIPT EKSTERNAL -->
+  <script src="script.js"></script>
+</body>
+</html>
