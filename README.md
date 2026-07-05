@@ -24,7 +24,7 @@ Floria adalah website hadiah digital bertema buket bunga yang dibuat menggunakan
 ## 📁 Struktur Folder
 
 ```text
-digital-flower-bouquet/
+bouquet project/
 │
 ├── index.html
 ├── style.css
